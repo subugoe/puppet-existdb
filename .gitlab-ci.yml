@@ -1,0 +1,32 @@
+image: "ruby:2.5"
+
+cache:
+  paths:
+    - vendor/ruby
+    - spec/fixtures
+
+before_script:
+  - gem install bundler  --no-ri --no-rdoc
+  - bundle install -j $(nproc) --path vendor
+
+test-validate:
+  stage: test
+  tags:
+   - docker-runner
+  script:
+  - bundle exec rake validate
+
+test-lint:
+  stage: test
+  tags:
+   - docker-runner
+  script:
+  - bundle exec rake lint
+
+test-rspec:
+  stage: test
+  tags:
+   - docker-runner
+  script:
+  - bundle exec rake spec
+  coverage: '/Resource coverage: \d+\.\d+/'
