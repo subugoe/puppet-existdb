@@ -1,12 +1,12 @@
 {
-  "name": "jonhallettuob-existdb",
-  "version": "0.3.3",
-  "author": "jonhallettuob",
+  "name": "existdb",
+  "version": "0.3.4",
+  "author": "jonhallettuob, Stefan Hynek",
   "summary": "A module to install the eXist database as a service",
   "license": "BSD-3-Clause",
-  "source": "https://github.com/eXist-db/puppet-existdb",
-  "project_page": "https://github.com/eXist-db/puppet-existdb",
-  "issues_url": "https://github.com/eXist-db/puppet-existdb",
+  "source": "https://gitlab.gwdg.de/dariah-de-puppet/puppet-existdb",
+  "project_page": "https://gitlab.gwdg.de/dariah-de-puppet/puppet-existdb",
+  "issues_url": "https://gitlab.gwdg.de/dariah-de-puppet/puppet-existdb/issues",
   "requirements": [
     {"name":"puppet","version_requirement":">= 4.7.0 < 7.0.0"}
   ],
@@ -16,10 +16,9 @@
   ],
   "operatingsystem_support": [
     {
-      "operatingsystem":"CentOS",
-      "operatingsystemrelease":["7"]
+      "operatingsystem":"Ubuntu",
+      "operatingsystemrelease":["18.04"]
     }
   ],
   "data_provider": null
 }
-

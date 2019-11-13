@@ -1,5 +1,8 @@
 # eXistdb Puppet module
 
+customized and enhanced for use in rdd
+
+
 #### Table of Contents
 
 1. [Description](#description)
@@ -14,8 +17,6 @@
 This module installs the eXist database software and starts it as a service.
 
 ## Setup
-
-### Beginning with existdb
 
 To use this module, add these declarations to your Puppetfile:
 
@@ -70,27 +71,37 @@ class existdb {
 }
 ```
 
+## Service Configuration
+
+When another service name (`$exist_service`) than the default ('eXist-db') is provided, the module looks after a configuration file `puppet:///modules/profiles/etc/systemd/system/${exist_service}.service`
+
 ## Reference
 
 ```
-class existdb (
+class existdb
+(
   $exist_home                  = '/usr/local/existdb',
   $exist_data                  = '/var/lib/existdb',
   $exist_cache_size            = '128M',
   $exist_collection_cache_size = '24M',
   $exist_revision              = 'eXist-5.0.0',
-  $exist_version               = '5.0.0',
+  $exist_version               = regsubst($exist_revision, '^eXist-', ''),
   $java_home                   = '/usr/lib/jvm/jre',
   $exist_user                  = 'existdb',
   $exist_group                 = 'existdb',
-) {
+  $exist_service               = 'eXist-db',
+  $running                     = true,
+)
+{
  ...
 }
 
 class existdb::reverseproxy (
   $servers,
-  $exist_home = '/usr/local/existdb',
-) {
+  $exist_home    = '/usr/local/existdb',
+  $exist_service = 'eXist-db',
+)
+{
  ...
 }
 
