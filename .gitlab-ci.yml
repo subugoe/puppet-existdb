@@ -1,32 +1,49 @@
 image: "ruby:2.5"
 
+stages:
+  - install
+  - test
+
 cache:
   paths:
     - vendor/ruby
     - spec/fixtures
+    - Gemfile.lock
 
-before_script:
-  - gem install bundler  --no-ri --no-rdoc
-  - bundle install -j $(nproc) --path vendor
+prepare:
+  stage: install
+  tags:
+    - docker-runner
+  script:
+    - gem install bundler -v 2.0.2
+    - bundle install --jobs $(nproc)
+    - bundle install --jobs $(nproc) --deployment
+
 
 test-validate:
   stage: test
   tags:
-   - docker-runner
+    - docker-runner
   script:
-  - bundle exec rake validate
+    - gem install bundler -v 2.0.2
+    - bundle install --deployment
+    - bundle exec rake validate
 
 test-lint:
   stage: test
   tags:
-   - docker-runner
+    - docker-runner
   script:
-  - bundle exec rake lint
+    - gem install bundler -v 2.0.2
+    - bundle install --deployment
+    - bundle exec rake lint
 
 test-rspec:
   stage: test
   tags:
-   - docker-runner
+    - docker-runner
   script:
-  - bundle exec rake spec
+    - gem install bundler -v 2.0.2
+    - bundle install --deployment
+    - bundle exec rake spec
   coverage: '/Resource coverage: \d+\.\d+/'

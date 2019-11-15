@@ -9,4 +9,18 @@
 # Learn more about module testing here:
 # https://docs.puppet.com/guides/tests_smoke.html
 #
-include ::existdb
+
+class
+{ '::existdb' :
+  exist_user                  => test,
+  exist_group                 => test,
+  exist_home                  => '/opt/test',
+  exist_service               => test,
+  exist_data                  => '/var/lib/textgrid',
+  exist_cache_size            => '128M',
+  exist_collection_cache_size => '24M',
+  exist_revision              => 'eXist-5.0.0',
+  exist_version               => '5.0.0',
+  java_home                   => '/usr/lib/jvm/jre',
+  running                     => running,
+}
