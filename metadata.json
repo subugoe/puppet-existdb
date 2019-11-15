@@ -1,5 +1,5 @@
 {
-  "name": "existdb",
+  "name": "puppet-existdb",
   "version": "0.3.4",
   "author": "jonhallettuob, Stefan Hynek",
   "summary": "A module to install the eXist database as a service",
